@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+}
+.wrapper {
+  margin: 0 auto;
+  width: 80%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* MAIN PAGE */
+
+.main {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+.cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/*CREATE PRODUCT */
+.shoes__block {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  
+  font-size: 24px;
+}
+.shoes__block a {
+  text-decoration: none;
+  color: black;
+}.shoes__block a:hover {
+  color: grey;
+}
+.product__create {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
