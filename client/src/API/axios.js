@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const instance = Axios.create({
-    baseURL: 'http://localhost:8000'
+    baseURL: 'https://smart-disign-test.herokuapp.com'
 })
 
 export default instance

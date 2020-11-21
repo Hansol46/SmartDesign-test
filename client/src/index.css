@@ -51,3 +51,9 @@ code {
   display: flex;
   justify-content: center;
 }
+
+/* PROFILE PAGE */
+.profile {
+  margin-top: 50px;
+  /* border: 2px solid green; */
+}

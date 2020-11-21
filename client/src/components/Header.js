@@ -14,11 +14,16 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+  },
+  link: {
+    color: 'white',
+    textDecoration: 'none',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -80,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({counter}) {
+export default function Header({counter, search, searchProduct, setSearch}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -123,6 +128,18 @@ export default function Header({counter}) {
   //   </Menu>
   // );
 
+
+  // SEARCH PRODUCT
+
+  const callSearchFunction =(event) => {
+    event.preventDefault()
+    search()
+    setSearch('')
+    console.log(searchProduct)
+  }
+
+
+
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -163,7 +180,7 @@ export default function Header({counter}) {
       </MenuItem>
     </Menu>
   );
-  const [searchValue, setSearchValue] = useState('')
+  // const [searchValue, setSearchValue] = useState('')
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -187,14 +204,17 @@ export default function Header({counter}) {
           <Typography className={classes.title} variant="h6" noWrap>
             Магазин Обуви
           </Typography>
+          
 
           {/* INPUT FIELD */}
+          <form onSubmit={callSearchFunction}>
+
           <div className={classes.search}>
             
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-
+          
             <InputBase
               placeholder="Поиск товара"
               classes={{
@@ -202,8 +222,23 @@ export default function Header({counter}) {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value={searchProduct}
+              onChange={event => setSearch(event.target.value)}
             />
+            
+            
           </div>
+          {/* <button type='submit' onClick={callSearchFunction}>Submit</button> */}
+          </form>
+
+
+
+          
+          <Typography className={classes.title} variant="h6" noWrap>
+            <Link to='/' className={classes.link}>
+            Главная страница
+            </Link>
+          </Typography>
 
 
           <div className={classes.grow} />
@@ -225,7 +260,9 @@ export default function Header({counter}) {
             //   onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <Link to='/profile' className={classes.link}>
+                <AccountCircle />
+              </Link>
             </IconButton>
           </div>
 

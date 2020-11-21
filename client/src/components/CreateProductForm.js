@@ -7,23 +7,20 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function CreateProductForm({description, nameProduct, setDescription, setName}) {
+export default function CreateProductForm({cards, description, nameProduct, setDescription, setName, handleCreate, fileInput}) {
   const [open, setOpen] = React.useState(false);
-
+ 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleCreate = (e) => {
-      console.log(nameProduct)
-      console.log(description)
+  };  
+  const handleCreateProduct = () => {
+    handleCreate();
+    setOpen(false)
+    console.log(fileInput)
   }
- 
-  
   return (
     <div className='product__create'>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -56,13 +53,24 @@ export default function CreateProductForm({description, nameProduct, setDescript
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
+          {/* DOWNLOAD FILE */}
+           <TextField
+            autoFocus
+            margin="dense"
+            id="fileInput"
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            ref={fileInput}
+            // value={description}
+            // onChange={(event) => setDescription(event.target.value)}
+          />
 
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">
             Выйти
           </Button>
-          <Button onClick={handleCreate} color="primary">
+          <Button onClick={handleCreateProduct} color="primary">
             Создать
           </Button>
         </DialogActions>
