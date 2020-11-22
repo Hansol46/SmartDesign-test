@@ -57,3 +57,28 @@ code {
   margin-top: 50px;
   /* border: 2px solid green; */
 }
+
+
+/* INFO PRODUCT */
+.infoProduct {
+  margin-top: 80px;
+}
+.infoProduct h1{
+  text-align: center;
+  margin-bottom: 50px;
+  color: grey;
+}
+.infoProduct img {
+  width: 200px;
+  margin-right: 30px;
+}
+.productBlock {
+  display: flex;
+}
+.productBlock p {
+  padding-bottom: 20px;
+}
+.productBlock span {
+  font-size: 20px;
+  font-weight: 600;
+}

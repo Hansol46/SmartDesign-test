@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MainPage from "./pages/MainPage";
-import ProductPage from "./pages/ProductPage";
 import { Route } from "react-browser-router";
 import Header from "./components/Header";
-import NavBar from "./components/NavBar";
-// import CreateProduct from "./components/CreateProduct";
 import instance from "./API/axios";
 import ProfilePage from "./pages/ProfilePage";
-import MainPageCard from "./components/MainPageCard";
-import Mans from "./pages/FilterProduct/Mans";
-import Womans from "./pages/FilterProduct/Womans";
-// import MainPageCard from "./components/MainPageCard";
+import InfoProduct from "./components/InfoProduct";
 
 // NO FOTO
 const photo =
   "https://neuronsk.ru/upload/medialibrary/771/771dad7444a2937b6085360951e048b1.png";
-
-
 
 
 
@@ -27,15 +19,12 @@ function App() {
     setCounter(counter + 1);
   };
 
-  // CARDS (DB MONGODB)
+  // CARDS (DATA API)
   const [cards, setCards] = useState([]);
 
   // CREATE PRODUCT
   const [nameProduct, setName] = useState("");
   const [description, setDescription] = useState("");
-
-  // DOWNLOAD FILES
-  const fileInput = React.createRef();
 
   // GET DATA
   useEffect(() => {
@@ -48,16 +37,12 @@ function App() {
 
   // SEARCH PRODUCT
   const [searchProduct, setSearch] = useState("");
-  const search = () => {
-    let filterCards = cards.filter((card) => {
-      const products = card.nameProduct
-        .toLowerCase()
-        .includes(searchProduct.toLowerCase());
-      return products;
-    });
-    console.log(filterCards);
-    setCards(filterCards);
-  };
+  const [filterCards, setFilter] = useState([])
+    useEffect(()=> {
+      setFilter(
+        cards.filter( card => card.nameProduct.toLowerCase().includes(searchProduct.toLowerCase()))
+      )
+    },[searchProduct, cards])
 
   // ADD NEW CARDS
   const handleCreate = () => {
@@ -71,32 +56,23 @@ function App() {
     ]);
   };
 
-
-  // FILTER 
-
   return (
     <>
       <Header
         counter={counter}
-        search={search}
         searchProduct={searchProduct}
         setSearch={setSearch}
+        cards={cards}
+        setCards={setCards}
       />
 
       <div className="wrapper">
-        <NavBar 
-        />
-        {/* <Route to='/mans' render={() => (<Mans cards={cards}/>)} />
-        <Route to='/womans' render={() => (<Womans cards={cards} />)} />  */}
-
-
-
         <Route
           path="/"
           exact
           render={() => (
             <MainPage
-              fileInput={fileInput}
+              filterCards={filterCards}
               handleCreate={handleCreate}
               cards={cards}
               nameProduct={nameProduct}
@@ -107,8 +83,10 @@ function App() {
             />
           )}
         />
-        <Route path="/product" component={ProductPage} />
         <Route path="/profile" component={ProfilePage} />
+        {cards.map( (card) => (
+          <Route path={`/product-info/${card._id}`}  render={ () => <InfoProduct {...card} />}/>
+          ))}
       </div>
     </>
   );

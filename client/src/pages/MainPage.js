@@ -1,36 +1,38 @@
 import React from "react";
-import CreateProduct from "../components/CreateProduct";
+import CreateProductForm from "../components/CreateProductForm";
 import MainPageCard from "../components/MainPageCard";
 
-function MainPage({ cards, basketCounter, setName, setDescription, description, nameProduct, handleCreate, fileInput}) {
-
+function MainPage({
+  filterCards,
+  basketCounter,
+  setName,
+  setDescription,
+  description,
+  nameProduct,
+  handleCreate,
+}) {
   return (
     <div className="main">
-
-      <CreateProduct
-      fileInput={fileInput}
-      handleCreate={handleCreate}
-      nameProduct={nameProduct} 
-      description={description} 
-      setDescription={setDescription}
-      setName={setName}
+      <CreateProductForm
+        handleCreate={handleCreate}
+        nameProduct={nameProduct}
+        description={description}
+        setDescription={setDescription}
+        setName={setName}
       />
 
       <div className="cards">
-
-        {cards.map( ({_id, description, nameProduct, imgProduct}) => (
-          <MainPageCard 
-          fileInput={fileInput}
-          key={_id}
-          description={description}
-          nameProduct={nameProduct}
-          imgProduct={imgProduct}
-          basketCounter={basketCounter}
+        {filterCards.map(({ _id, description, nameProduct, imgProduct }) => (
+          <MainPageCard
+            key={_id}
+            id={_id}
+            description={description}
+            nameProduct={nameProduct}
+            imgProduct={imgProduct}
+            basketCounter={basketCounter}
           />
         ))}
-
       </div>
-
     </div>
   );
 }

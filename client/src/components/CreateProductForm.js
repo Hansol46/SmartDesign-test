@@ -19,7 +19,8 @@ export default function CreateProductForm({cards, description, nameProduct, setD
   const handleCreateProduct = () => {
     handleCreate();
     setOpen(false)
-    console.log(fileInput)
+    setName('')
+    setDescription('')
   }
   return (
     <div className='product__create'>
@@ -32,7 +33,7 @@ export default function CreateProductForm({cards, description, nameProduct, setD
           <DialogContentText>
             Введите название товара и его описание
           </DialogContentText>
-
+          {/* NAME */}
           <TextField
             autoFocus
             margin="dense"
@@ -43,6 +44,7 @@ export default function CreateProductForm({cards, description, nameProduct, setD
             value={nameProduct}
             onChange={(event) => setName(event.target.value)}
           />
+          {/* DESCRIPTION */}
           <TextField
             autoFocus
             margin="dense"
@@ -53,18 +55,6 @@ export default function CreateProductForm({cards, description, nameProduct, setD
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
-          {/* DOWNLOAD FILE */}
-           <TextField
-            autoFocus
-            margin="dense"
-            id="fileInput"
-            type="file"
-            accept=".jpg, .jpeg, .png"
-            ref={fileInput}
-            // value={description}
-            // onChange={(event) => setDescription(event.target.value)}
-          />
-
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">
