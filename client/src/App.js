@@ -29,8 +29,8 @@ function App() {
   // GET DATA
   useEffect(() => {
     async function fetchData() {
-      const response = await instance.get("/cards");
-      setCards(response.data);
+      const response = await instance.get("/cards")
+      setCards(response.data)
     }
     fetchData();
   }, []);
@@ -40,20 +40,20 @@ function App() {
   const [filterCards, setFilter] = useState([])
     useEffect(()=> {
       setFilter(
-        cards.filter( card => card.nameProduct.toLowerCase().includes(searchProduct.toLowerCase()))
+        cards.filter( filterCard => 
+          filterCard.nameProduct.toLowerCase().includes(searchProduct.toLowerCase()) || 
+          filterCard.description.toLowerCase().includes(searchProduct.toLocaleLowerCase()) 
+        )
       )
-    },[searchProduct, cards])
-
+    },[searchProduct, cards ])
+    
   // ADD NEW CARDS
-  const handleCreate = () => {
-    setCards([
-      ...cards,
-      {
-        nameProduct: nameProduct,
-        description: description,
-        imgProduct: photo,
-      },
-    ]);
+  const handleCreate = async () => {
+    await instance.post("/cards", {
+      nameProduct: nameProduct,
+      description: description
+    }) 
+    window.location.reload()
   };
 
   return (
@@ -85,7 +85,7 @@ function App() {
         />
         <Route path="/profile" component={ProfilePage} />
         {cards.map( (card) => (
-          <Route path={`/product-info/${card._id}`}  render={ () => <InfoProduct {...card} />}/>
+          <Route path={`/product-info/${card._id}`}  key={card._id} render={ () => <InfoProduct {...card} />}/>
           ))}
       </div>
     </>

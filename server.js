@@ -9,8 +9,8 @@ const app = express()
 const port = process.env.PORT || 8000
 
 // Middlewares
-app.use(express.json())
 app.use(cors())
+app.use(express.json())
 
 // DB config
 const connectUrl = 'mongodb+srv://admin:UmAdkRhpA36KHUEt@cluster0.odbjc.mongodb.net/testwork?retryWrites=true&w=majority'

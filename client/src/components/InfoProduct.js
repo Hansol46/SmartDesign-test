@@ -1,7 +1,7 @@
 import React from "react";
 
 function InfoProduct(props) {
-  const { nameProduct, description, imgProduct } = props;
+  const { nameProduct, description, imgProduct, size } = props;
 
   return (
     <div className="infoProduct">
@@ -13,6 +13,7 @@ function InfoProduct(props) {
         <div>
           <p> <span>Название:</span> {nameProduct}</p>
           <p> <span>Описание:</span> {description}</p>
+          <p> <span>Размер:</span> {size}</p>
           <p> <span>Отзывов:</span> 5</p>
           <p> <span>Количество на складе:</span> осталось 21</p>
         </div>
