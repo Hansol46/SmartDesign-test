@@ -35,6 +35,7 @@ function App() {
     fetchData();
   }, []);
 
+  
   // SEARCH PRODUCT
   const [searchProduct, setSearch] = useState("");
   const [filterCards, setFilter] = useState([])
@@ -46,7 +47,7 @@ function App() {
         )
       )
     },[searchProduct, cards ])
-    
+
   // ADD NEW CARDS
   const handleCreate = async () => {
     await instance.post("/cards", {
